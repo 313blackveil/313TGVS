@@ -1,30 +1,71 @@
 # 313TGVS
 
-# Analiza
+# Argumentum
 
-Un instrument web interactiv, minimalist și static, conceput pentru analiza critică a retoricii economice globaliste. Proiectul explorează premisele adoptării monedei Euro în România prin prisma criteriilor de convergență, a pierderii suveranității monetare și a lecțiilor istorice (exemplul Greciei).
+Argumentum este un proiect experimental pentru organizarea și analizarea ideilor sub forma unui grafic interactiv de argumente.
 
-## Obiectiv
-Scopul acestui proiect este demontarea narativelor economice simpliste prin expunerea structurată a contradicțiilor logice. Site-ul funcționează ca o „hartă de luptă” logică, oferind utilizatorului posibilitatea de a explora argumente și contra-argumente într-un flux controlat.
+În loc să prezinte o discuție ca pe o listă obișnuită de texte, proiectul o transformă într-o structură vizuală în care fiecare idee poate deschide noi ramuri: argumente, contraargumente, răspunsuri, obiecții, concluzii și idei secundare.
 
-## Caracteristici Tehnice
-* **Zero Dependențe:** Totul este conținut într-un singur fișier HTML (CSS, JS, SVG). Nu necesită backend, baze de date sau hosting complex.
-* **Offline-First:** Poate fi rulat direct în browser, local, fără conexiune la internet.
-* **Design Minimalist:** Estetică tip "Blueprint" cu accent pe lizibilitate și ierarhie vizuală.
-* **Interactivitate:** Sistem de expandare secvențială pentru a ghida cititorul pas cu pas prin firul logic al analizei.
+Cum funcționează
 
-## Utilizare
-1. Deschide fișierul `index.html` în orice browser modern.
-2. Urmează fluxul logic prin click pe elementele principale.
-3. Utilizează iconița de **Reset** din colțul dreapta-sus pentru a relua analiza de la zero.
+La început este afișat un singur nod principal. Acesta reprezintă premisa sau întrebarea de la care pornește analiza.
 
-## Structura Analizei
-* **Premisa:** Analiza declarațiilor publice și a presiunii sociale.
-* **Argumente Pro (Exemple Reușite):** Analiza critică a miturilor privind "succesul" adoptării Euro.
-* **Contra-Argumente:** Studiul de caz al Greciei ca exemplu de eșec structural al Zonei Euro.
+Prin apăsarea unui nod, se deschide următorul nivel al graficului. Fiecare nod poate avea la rândul său alte noduri, astfel încât structura poate continua pe cât de multe niveluri este nevoie.
 
-## Contribuții
-Acest proiect este o resursă deschisă pentru cei interesați de analiza critică a politicilor economice. Structura este modulară, permițând adăugarea facilă de noi ramuri logice direct în codul sursă.
+Fiecare tip de idee are propria culoare:
 
----
-*Proiect creat pentru analiză și gândire critică.*
+- 🔵 Argument
+- 🟥 Contraargument
+- 🟢 Răspuns
+- 🟡 Idee / Context
+- 🟣 Idee nouă
+- ⚪ Premisă
+- 🔴 Obiecție
+
+Nodurile sunt conectate vizual, iar utilizatorul poate deplasa întregul grafic și poate face zoom pentru a urmări ramurile mai mari.
+
+Structura datelor
+
+În momentul de față, conținutul este păstrat într-un singur obiect JavaScript. Fiecare nod poate conține:
+
+{
+    text: "Ideea",
+
+    type: "Argument",
+
+    color: "blue",
+
+    children: [
+        {
+            text: "Contraargument",
+            type: "Contraargument",
+            color: "burgundy",
+            children: []
+        }
+    ]
+}
+
+Important este sistemul "children". Un nod poate avea copii, iar acei copii pot avea la rândul lor alți copii. În felul acesta, graficul nu are o limită practică de adâncime.
+
+Direcția proiectului
+
+Argumentum este încă în dezvoltare. Ideea este ca proiectul să evolueze dintr-un simplu grafic într-un spațiu în care o dezbatere întreagă poate fi construită și explorată vizual.
+
+Printre direcțiile pe care le văd pentru proiect:
+
+- categorii și subiecte separate;
+- salvarea graficelor;
+- posibilitatea de a adăuga noduri direct din interfață;
+- editarea și ștergerea argumentelor;
+- căutare în interiorul unui grafic;
+- mai multe tipuri de relații între idei;
+- surse și referințe atașate argumentelor;
+- posibilitatea de a deschide și partaja un anumit grafic;
+- export și import de structuri;
+- colaborare între mai mulți utilizatori;
+- istoricul modificărilor;
+- o interfață mai apropiată de o tablă vizuală, unde ideile pot fi mutate și reorganizate liber.
+
+Pentru moment, proiectul rămâne într-un singur fișier HTML, tocmai pentru a fi ușor de modificat, testat și rulat direct în browser.
+
+Argumentum nu încearcă să spună care argument este adevărat. Scopul este să facă structura unei argumentări mai ușor de văzut, urmărit și analizat.
