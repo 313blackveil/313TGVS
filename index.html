@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+<style>
+    body { 
+        background-color: #050505; 
+        background-image: radial-gradient(#1a1a1a 0.5px, transparent 0.5px);
+        background-size: 20px 20px;
+        color: #d1d1d1; font-family: 'Georgia', serif; 
+        padding: 60px 20px; display: flex; justify-content: center;
+    }
+    
+    .container { max-width: 600px; width: 100%; position: relative; }
+
+    #reset-btn {
+        position: fixed; top: 30px; right: 30px;
+        background: none; border: none; cursor: pointer;
+        opacity: 0.5; transition: 0.3s;
+    }
+    #reset-btn:hover { opacity: 1; transform: rotate(90deg); }
+
+    .arg-block {
+        margin-left: 20px; margin-bottom: 30px;
+        padding: 25px; border-left: 4px solid #333;
+        background: rgba(20, 20, 20, 0.9);
+        backdrop-filter: blur(5px);
+        cursor: pointer;
+        transition: all 0.6s ease;
+        position: relative;
+    }
+
+    .arg-block::before {
+        content: ''; position: absolute; left: -24px; top: -50%;
+        width: 4px; height: 100%; background: #222; z-index: -1;
+    }
+
+    .hidden { opacity: 0; transform: translateY(-10px); height: 0; overflow: hidden; padding: 0 25px; border-left-width: 0; }
+    .visible { opacity: 1; transform: translateY(0); height: auto; border-left-width: 4px; }
+
+    .tag { font-size: 0.65rem; color: #888; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 8px; display: block; }
+    .content { font-size: 1.1rem; line-height: 1.6; }
+    
+    .c-negru { border-left-color: #fff; }
+    .c-visiniu { border-left-color: #8b0000; }
+    .c-rosu { border-left-color: #cc0000; }
+    .c-albastru { border-left-color: #0056b3; }
+
+    .expandable-container { display: flex; flex-direction: column; gap: 15px; margin-top: 15px; }
+    .expand-item { border: 1px solid #333; padding: 15px; cursor: pointer; transition: 0.3s; }
+    .expand-item:hover { border-color: #0056b3; }
+    .hidden-text { display: none; margin-top: 10px; color: #aaa; font-style: italic; }
+</style>
+</head>
+<body>
+
+<button id="reset-btn" onclick="location.reload()" title="Resetează fluxul">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"></path><path d="M3 3v5h5"></path></svg>
+</button>
+
+<div class="container">
+    <h1 style="text-align:center; margin-bottom:60px; font-weight:normal; letter-spacing:3px; font-size: 1.5rem;">ANALIZA LOGICĂ</h1>
+
+    <div class="arg-block c-negru" onclick="revela(this, 'bloc-analiza', true)">
+        <span class="tag">Premisă</span>
+        <div class="content">"Adoptarea monedei euro este calea spre prosperitate (N. Dan), o viziune dominantă alimentată de frica de a rămâne la periferia Europei."</div>
+    </div>
+
+    <div id="bloc-analiza" class="hidden">
+        
+        <!-- Buton Exemple Reușite (Albastru) -->
+        <div class="arg-block c-albastru" onclick="toggleContra(this, 'lista-pro')">
+            <span class="tag">Argumente</span>
+            <div class="content">"Susținătorii euro dau ca exemplu succesul altor state. Hai sa vedem de ce România nu ar funcționa corect"</div>
+        </div>
+        <div id="lista-pro" class="arg-block c-albastru hidden">
+            <div class="expandable-container">
+                <div class="expand-item" onclick="toggleText(this)"><strong>1. Productivitatea muncii precară</strong><div class="hidden-text">România are o productivitate a muncii mult sub media zonei euro; în lipsa unei monede naționale care să se ajusteze, companiile românești vor deveni necompetitive peste noapte.</div></div>
+                <div class="expand-item" onclick="toggleText(this)"><strong>2. Absența politicii monetare proprii</strong><div class="hidden-text">Banca Națională a României nu va mai putea interveni pentru a stabiliza economia în caz de criză, lăsând țara la mila deciziilor luate la Frankfurt, care nu țin cont de specificul nostru.</div></div>
+                <div class="expand-item" onclick="toggleText(this)"><strong>3. Vulnerabilitatea structurii economice</strong><div class="hidden-text">Economia noastră depinde de investiții atrase prin costuri salariale competitive; intrarea în zona euro va elimina acest avantaj fără a oferi tehnologia necesară pentru a concura cu marile puteri.</div></div>
+            </div>
+        </div>
+
+        <!-- Buton Contra-Argumente -->
+        <div class="arg-block c-visiniu" onclick="toggleContra(this, 'lista-contra')">
+            <span class="tag">Contra-argument</span>
+            <div class="content">"Grecia este exemplul palpabil al eșecului acestui model. Iată perspectivele critice:"</div>
+        </div>
+        <div id="lista-contra" class="arg-block c-rosu hidden">
+            <div class="expandable-container">
+                <div class="expand-item" onclick="toggleText(this)"><strong>1. Capcana devalorizării imposibile</strong><div class="hidden-text">Grecia nu a mai putut devaloriza moneda proprie pentru a-și face exporturile competitive, fiind blocată într-o monedă prea puternică pentru economia sa. Rezultatul a fost o economie paralizată, forțată să taie drastic salariile și pensiile pentru a plăti datorii externe imposibil de rambursat.</div></div>
+                <div class="expand-item" onclick="toggleText(this)"><strong>2. Pierderea monedei naționale</strong><div class="hidden-text">Renunțarea la moneda națională a însemnat abandonarea instrumentului esențial de politică monetară, lăsând țara fără capacitatea de a reacționa la șocurile economice specifice contextului său local.</div></div>
+                <div class="expand-item" onclick="toggleText(this)"><strong>3. Criteriile de convergență și decalajul structural</strong><div class="hidden-text">Dincolo de mitul prosperității, există criterii tehnice (convergența nominală și reală) pe care România nu le îndeplinește. Adoptarea forțată a monedei euro în absența unei productivități comparabile cu nucleul european ar duce la o pierdere iremediabilă a competitivității, transformând economia într-o piață de desfacere pentru importuri scumpe.</div></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function revela(el, id, first) {
+        document.getElementById(id).classList.remove('hidden');
+        if(first) el.onclick = null;
+    }
+    function toggleContra(el, childId) {
+        document.getElementById(childId).classList.toggle('hidden');
+        document.getElementById(childId).classList.toggle('visible');
+    }
+    function toggleText(el) {
+        const text = el.querySelector('.hidden-text');
+        text.style.display = (text.style.display === 'block') ? 'none' : 'block';
+    }
+</script>
+
+</body>
+</html>
